@@ -1,0 +1,3 @@
+[submodule "pleroma-access-token"]
+	path = pleroma-access-token
+	url = https://git.sr.ht/~mjorgensen/pleroma-access-token
