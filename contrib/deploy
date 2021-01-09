@@ -7,7 +7,7 @@ pandoc -s --template tools.splat.soy.html \
 	--metadata title="tools.splat.soy" \
 	-o _site/index.html README.md
 echo "### Post-build commit ###"
-git add --all; git commit -m "$DATE build";git push
+git add _site/*; git commit -m "$DATE build";git push
 echo "### Deploying site ###"
 sshopts="-o StrictHostKeyChecking=no -i ~/.ssh/mario_rsa"
 rsync --rsh="ssh $sshopts" -rP _site/ deploy@tools.splat.soy:/var/www/tools.splat.soy/ --delete
