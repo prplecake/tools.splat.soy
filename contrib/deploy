@@ -1,10 +1,13 @@
 PWD=$(pwd)
+DATE=`date +%Y-%m-%d`
 
 echo "Working dir: $PWD"
 echo "### Building site ###"
 pandoc -s --template tools.splat.soy.html \
 	--metadata title="tools.splat.soy" \
-	-o index.html README.md
+	-o _site/index.html README.md
+echo "### Post-build commit ###"
+git add _site/*; git commit -m "$DATE build";git push
 echo "### Deploying site ###"
 sshopts="-o StrictHostKeyChecking=no -i ~/.ssh/mario_rsa"
-rsync --rsh="ssh $sshopts" -rP ./ deploy@tools.splat.soy:/var/www/tools.splat.soy/ --delete
+rsync --rsh="ssh $sshopts" -rP _site/ deploy@tools.splat.soy:/var/www/tools.splat.soy/ --delete
