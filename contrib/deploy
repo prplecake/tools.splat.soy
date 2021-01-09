@@ -1,0 +1,10 @@
+PWD=$(pwd)
+
+echo "Working dir: $PWD"
+echo "### Building site ###"
+pandoc -s --template tools.splat.soy.html \
+	--metadata title="tools.splat.soy" \
+	-o index.html README.md
+echo "### Deploying site ###"
+sshopts="-o StrictHostKeyChecking=no -i ~/.ssh/mario_rsa"
+rsync --rsh="ssh $sshopts" -rP ./ deploy@tools.splat.soy:/var/www/tools.splat.soy/ --delete
