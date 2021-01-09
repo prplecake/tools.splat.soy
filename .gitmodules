@@ -1,3 +1,4 @@
-[submodule "pleroma-access-token"]
-	path = pleroma-access-token
-	url = https://git.sr.ht/~mjorgensen/pleroma-access-token
+[submodule "_site/pleroma-access-token"]
+	path = _site/pleroma-access-token
+	url = https://git.jrgnsn.net/matthew/pleroma-access-token.git
+	branch = master
