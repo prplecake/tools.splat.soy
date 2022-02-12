@@ -11,3 +11,8 @@ at the Fediverse community.
 
 - <https://ocr.space/> - tends to be more accurate
 - <https://www.newocr.com/>
+
+## RSS/Atom Feeds
+
+- [gof](https://github.com/prplecake/gof) - a command-line utility to post
+RSS/Atom feeds to the fediverse 
