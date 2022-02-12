@@ -16,3 +16,8 @@ at the Fediverse community.
 
 - [gof](https://github.com/prplecake/gof) - a command-line utility to post
 RSS/Atom feeds to the fediverse 
+
+## Browser Add-ons
+
+- [MastoPinner](https://github.com/prplecake/mastopinner) - Save Mastodon posts to Pinboard
+([Firefox](https://addons.mozilla.org/en-US/firefox/addon/mastopinner/))
