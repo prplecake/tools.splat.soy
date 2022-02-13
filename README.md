@@ -1,11 +1,10 @@
-tools.splat.soy
-===============
+# tools.splat.soy
 
 Here you may find some tools that may be useful. These tools are aimed
 at the Fediverse community.
 
--   [Instance Emoji Viewer](https://fedimojis.feuerfuchs.dev)
--   [Fediverse Instance API Token Generator](/fediverse-access-token)
+- [Instance Emoji Viewer](https://fedimojis.feuerfuchs.dev)
+- [Fediverse Instance API Token Generator](/fediverse-access-token)
 
 ## OCR
 
@@ -14,8 +13,8 @@ at the Fediverse community.
 
 ## RSS/Atom Feeds
 
-- [gof](https://github.com/prplecake/gof) - a command-line utility to post
-RSS/Atom feeds to the fediverse 
+- [gof](https://github.com/prplecake/gof) - a command-line utility to
+  post RSS/Atom feeds to the fediverse
 
 ## Browser Add-ons
 
@@ -24,5 +23,6 @@ RSS/Atom feeds to the fediverse
 
 ## Bookmark Syncing
 
-- [mastodon-bookmark-sync](https://github.com/prplecake/mastodon-bookmark-sync) - 
-Synchronize your Mastodon booksmarks to Pinboard
+- [mastodon-bookmark-sync](https://github.com/prplecake/mastodon-bookmark-sync)
+
+Synchronize your Mastodon bookmarks to Pinboard
