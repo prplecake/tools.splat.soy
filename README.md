@@ -21,3 +21,8 @@ RSS/Atom feeds to the fediverse
 
 - [MastoPinner](https://github.com/prplecake/mastopinner) - Save Mastodon posts to Pinboard
 ([Firefox](https://addons.mozilla.org/en-US/firefox/addon/mastopinner/))
+
+## Bookmark Syncing
+
+- [mastodon-bookmark-sync](https://github.com/prplecake/mastodon-bookmark-sync) - 
+Synchronize your Mastodon booksmarks to Pinboard
