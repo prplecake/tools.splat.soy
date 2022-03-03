@@ -1,4 +1,4 @@
-[submodule "_site/fediverse-access-token"]
-	path = _site/fediverse-access-token
-	url = https://github.com/prplecake/fediverse-access-token
+[submodule "_site/pleroma-access-token"]
+	path = _site/pleroma-access-token
+	url = https://github.com/prplecake/pleroma-access-token
 	branch = master
