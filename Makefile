@@ -7,7 +7,7 @@ all: serve
 
 submodule-update:
 	echo "### Updating submodules ###"
-	git submodule update --remote --merge
+	git submodule update --init --remote --merge
 
 build: submodule-update
 	echo "### Building site ###"
