@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Access Token Generator for Pleroma API</title>
+	<style>
+		html {
+			font-family: sans-serif;
+			background: white;
+		}
+
+		body {
+			max-width: 800px;
+			margin: 0 auto;
+			background-color: #EEEEEE;
+			padding: 1rem 0.5rem;
+		}
+
+		h2 {
+			display: inline;
+		}
+
+		label {
+			display: inline-block;
+			width: 275px;
+			text-align: right;
+		}
+
+		input, select {
+			min-width: 145px;
+		}
+
+		small.small {
+			display: inline-block;
+			min-width: 275px;
+			text-align: right;
+		}
+
+		#form-result-container {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+		}
+
+		#form-container {
+			grid-column-start: 1;
+		}
+
+		#result-container {
+			grid-column-start: 2;
+		}
+	</style>
+</head>
+<body>
+	<h1>Access Token Generator for Pleroma API</h1>
+
+	<div id="form-result-container">
+		<div id="form-container">
+			<h2>Form</h2>
+			<form method="post" action="#" id="sbmt">
+				<p>
+					<label class="label" for="instance_url">Instance URL
+						<input type="text" id="instance_url"
+						value="https://" required>
+					</label><br />
+					<small class="small">(https://mastodon.social, https://freeradical.zone, ...)</small>
+				</p>
+				<p>
+					<label class="label">Client Name
+						<input class="input is-primary" type="text" id="client_name" placeholder="sample-client" required>
+					</label>
+				</p>
+				<p>
+					<label class="label">Web site
+						<input class="input is-primary" type="text" id="website" placeholder="https://yourwebsite.host">
+					</label>
+				</p>
+				<p class="control">
+					<label class="label">Scopes
+						<span class="select">
+							<select name="scopes" id="scopes">
+								<option>read</option>
+								<option>write</option>
+								<option>follow</option>
+								<option>read write</option>
+								<option>read follow</option>
+								<option>write follow</option>
+								<option>read write follow</option>
+							</select>
+						</span>
+					</label>
+				</p>
+
+				<p>
+					<button class="button" type="submit" id="btn" name="btn">Publish access_token</button>
+
+					<button class="button is-primary is-outlined" type="button" id="btn_clr" name="btn_clr">clear tokens</button>
+				</p>
+			</form>
+		</div>
+
+		<div id="result-container">
+
+			<h2>Result</h2>
+
+			<div class="message-header">
+				<p>access_token</p>
+			</div>
+			<div class="message-body">
+				<p><span id="access_token"></span></p>
+			</div>
+
+			<div class="message-header">
+				<p>client_id &nbsp;<button id="btn_client_id" type="button" class="button is-small is-inverted">show</button></p>
+			</div>
+			<div class="message-body">
+				<p><span id="client_id" style="visibility:hidden;"></span></p>
+			</div>
+
+			<div class="message-header">
+				<p>client_secret &nbsp;<button id="btn_client_secret" type="button" class="button is-small is-inverted">show</button></p>
+			</div>
+			<div class="message-body">
+				<p><span id="client_secret" style="visibility:hidden;"></span></p>
+			</div>
+
+		</div>
+	</div>
+
+	<details>
+		<summary><strong>About This Site</strong></summary>
+		<p>When you want to use Mastodon API, you need access_token for your application.  Using this site, you can get new access_token of your Mastodon site.</p>
+		<p>You can see all applications you've authorized in your account's <strong>Authorized apps</strong> settings.</p>
+		<p>
+			Maintained by <a href="https://freeradical.zone/@prplecake">@prplecake@freeradical.zone</a>
+		</p>
+		<p>
+			Source code:
+			<a href="https://github.com/prplecake/pleroma-access-token">
+				https://github.com/prplecake/pleroma-access-token
+			</a>
+		</p>
+	</details>
+	<details>
+		<summary><strong>About Security</strong></summary>
+		<p>
+			This page uses your <strong>client_id, client_secret and access_token</strong>, but the site is a pure JavaScript SPA site; <strong>no server-side applications, no external scripts, no tracking your activities</strong>.
+		</p>
+		<p>
+			If you can't trust this site, you can copy this page, or clone the repository, and host it locally any number of ways.
+			This page uses <a href="http://vanilla-js.com/">Vanilla JS</a>, so you can easily confirm what it does.
+		</p>
+	</details>
+	<script>
+		function elem(el) {
+			return document.getElementById(el);
+		}
+
+		function makePostData(args) {
+			var data = [];
+			Object.keys(args).forEach(function(key) {
+				data.push(encodeURIComponent(key) + '=' + encodeURIComponent(args[key]));
+			});
+			rtn = data.join('&').replace(/%20/g, '+');
+			return rtn
+		}
+
+		function post(url, args, done) {
+			var xhr = new XMLHttpRequest();
+			xhr.onreadystatechange = function() {
+				if (xhr.readyState === 4 && xhr.status === 200) {
+					var data = xhr.response;
+					done(data);
+				}
+			}
+			xhr.open("POST", url, true);
+			xhr.setRequestHeader("Content-Type" , "application/x-www-form-urlencoded");
+			xhr.responseType = "json";
+			var postData = makePostData(args);
+			xhr.send(postData);
+		}
+
+		function getQueryVariable(variable)
+		{
+			var query = window.location.search.substring(1);
+			var vars = query.split("&");
+			for (var i=0;i<vars.length;i++) {
+				var pair = vars[i].split("=");
+				if(pair[0] == variable){return pair[1];}
+			}
+			return(false);
+		}
+
+		/* main */
+		var redirect_uri = window.location.protocol+"//"+window.location.host+window.location.pathname;
+		var instance_url = localStorage.getItem("INSTANCE_URL");
+		var client_id = localStorage.getItem("INSTANCE_CLIENT_ID");
+		var client_secret = localStorage.getItem("INSTANCE_CLIENT_SECRET");
+
+		if (window.location.href.indexOf("?code=") !== -1 && instance_url != "" && client_id != "" && client_secret != "") {
+			var code = getQueryVariable("code");
+			var url2 = instance_url+"/oauth/token";
+			elem("instance_url").value = instance_url;
+			elem("client_id").textContent = client_id;
+			elem("client_secret").textContent = client_secret;
+			var args2 = {client_id: client_id,
+				client_secret: client_secret,
+				redirect_uri: redirect_uri,
+				grant_type: "authorization_code",
+				code: code};
+				post(url2, args2, function(data) {
+					elem('access_token').textContent = data.access_token;
+				})
+			} else {
+				localStorage.setItem("INSTANCE_URL", "");
+				localStorage.setItem("INSTANCE_CLIENT_ID", "");
+				localStorage.setItem("INSTANCE_CLIENT_SECRET", "");
+			}
+
+			elem("sbmt").addEventListener("submit", function(event) {
+				event.preventDefault();
+				var url = elem("instance_url").value+"/api/v1/apps";
+				var s = elem("scopes");
+				var scopes = s.options[s.selectedIndex].value;
+				var args = {client_name: elem("client_name").value,
+				redirect_uris: redirect_uri,
+				website: elem("website").value,
+				scopes: scopes};
+				post(url ,args, function(data) {
+					localStorage.setItem("INSTANCE_URL", elem("instance_url").value);
+					localStorage.setItem("INSTANCE_CLIENT_ID", data.client_id);
+					localStorage.setItem("INSTANCE_CLIENT_SECRET", data.client_secret);
+					var redirectLink = elem("instance_url").value+"/oauth/authorize?client_id="+data.client_id+"&redirect_uri="+redirect_uri+"&response_type=code&scope=" + scopes;
+					window.location.href = redirectLink;
+				});
+			});
+
+			elem("btn_clr").addEventListener("click", function(event) {
+				elem('access_token').textContent = "";
+				elem('client_id').textContent = "";
+				elem('client_secret').textContent = "";
+				localStorage.setItem("INSTANCE_URL", "");
+				localStorage.setItem("INSTANCE_CLIENT_ID", "");
+				localStorage.setItem("INSTANCE_CLIENT_SECRET", "");
+			});
+
+			elem("btn_client_secret").addEventListener("click", function(event) {
+				elem("client_secret").style.visibility = "visible";
+			});
+			elem("btn_client_id").addEventListener("click", function(event) {
+				elem("client_id").style.visibility = "visible";
+			});
+	</script>
+</body>
+</html>
