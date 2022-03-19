@@ -11,6 +11,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    
+    - name: Install pandoc
+      run: sudo apt install -y pandoc
 
     - name: Build
       run: make build
