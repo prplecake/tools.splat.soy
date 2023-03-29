@@ -3,7 +3,6 @@
 Here you may find some tools that may be useful. These tools are aimed
 at the Fediverse community.
 
-- [Instance Emoji Viewer](https://fedimojis.feuerfuchs.dev)
 - [Pleroma API Token Generator](/pleroma-access-token)
 
 ## OCR
@@ -26,3 +25,7 @@ at the Fediverse community.
 - [mastodon-bookmark-sync](https://github.com/prplecake/mastodon-bookmark-sync)
 
 Synchronize your Mastodon bookmarks to Pinboard
+
+## Mastodon Admin CLI
+
+- [CiT.CLI](https://github.com/CompostInTraining/CiT.CLI)
