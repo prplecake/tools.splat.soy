@@ -12,19 +12,23 @@ at the Fediverse community.
 
 ## RSS/Atom Feeds
 
-- [gof](https://github.com/prplecake/gof) - a command-line utility to
-  post RSS/Atom feeds to the fediverse
+- [gof] - a command-line utility to post RSS/Atom feeds to the fediverse
+
+[gof]:https://github.com/prplecake/gof
 
 ## Browser Add-ons
 
-- [MastoPinner](https://github.com/prplecake/mastopinner) - Save Mastodon posts to Pinboard
-([Firefox](https://addons.mozilla.org/en-US/firefox/addon/mastopinner/))
+- [MastoPinner](https://github.com/prplecake/mastopinner) - Save Mastodon 
+  posts to Pinboard ([Firefox][mastopinner-amo])
+
+[mastopinner-amo]:https://addons.mozilla.org/en-US/firefox/addon/mastopinner/
 
 ## Bookmark Syncing
 
-- [mastodon-bookmark-sync](https://github.com/prplecake/mastodon-bookmark-sync)
+- [mastodon-bookmark-sync] - Synchronize your Mastodon bookmarks to LinkAce 
+  and other bookmarking services.
 
-Synchronize your Mastodon bookmarks to Pinboard
+[mastodon-bookmark-sync]:https://github.com/prplecake/mastodon-bookmark-sync
 
 ## Mastodon Admin CLI
 
