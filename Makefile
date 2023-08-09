@@ -12,6 +12,7 @@ build:
 		--metadata title="tools.splat.soy" \
 		--include-in-header=scripts/analytics.js \
 		-o _site/index.html README.md
+	cp CNAME _site
 	cp submodules/robots.txt/robots.txt _site
 
 sshopts := -o StrictHostKeyChecking=no -i ~/.ssh/deploy_rsa
