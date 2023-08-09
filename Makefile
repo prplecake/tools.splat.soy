@@ -5,11 +5,7 @@ DATE := $(shell date "+%Y-%m-%d %H:%M:%S")
 
 all: serve
 
-submodule-update:
-	echo "### Updating submodules ###"
-	git submodule update --init --remote --merge
-
-build: submodule-update
+build:
 	echo "### Building site ###"
 	mkdir _site
 	pandoc -s --template templates/tools.splat.soy.html \
