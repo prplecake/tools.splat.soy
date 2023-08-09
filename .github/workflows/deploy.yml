@@ -2,25 +2,43 @@ name: Deploy
 
 on:
   push:
-    branches: [ master ]
+    branches: ["master"]
   workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
 
 jobs:
   deploy:
-
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v2
-    
-    - name: Install pandoc
-      run: sudo apt install -y pandoc
-
-    - name: Build
-      run: make build
-
-    - name: Deploy
-      uses: peaceiris/actions-gh-pages@v3.7.3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./_site
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          submodules: recursive
+      - name: Setup Pages
+        uses: actions/configure-pages@v3
+      - name: Build site
+        run: make build
+      - name: Create CNAME
+        run: |
+          echo "URL: $url"
+          echo "$url" > _site/CNAME
+        env:
+          url: ${{ steps.deployment.outputs.page_url }}
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v2
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2
