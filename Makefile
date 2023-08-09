@@ -11,6 +11,7 @@ submodule-update:
 
 build: submodule-update
 	echo "### Building site ###"
+	mkdir _site
 	pandoc -s --template templates/tools.splat.soy.html \
 		--metadata title="tools.splat.soy" \
 		--include-in-header=scripts/analytics.js \
