@@ -1,4 +1,4 @@
-name: Update submodules
+name: Update submodule robots.txt
 
 on:
   workflow_dispatch:
@@ -11,7 +11,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  update-submodules:
+  update-submodule-robots-txt:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -19,7 +19,7 @@ jobs:
         with:
           submodules: recursive
       - name: Update submodules
-        run: git submodule update --remote
+        run: git submodule update --remote submodules/robots.txt
       - name: Commit changes
         if: ${{ github.event_name != 'pull_request' }}
         uses: devops-infra/action-commit-push@master
