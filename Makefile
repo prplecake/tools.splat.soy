@@ -14,6 +14,7 @@ build:
 		-o _site/index.html README.md
 	cp CNAME _site
 	cp submodules/robots.txt/robots.txt _site
+	cp -r submodules/pleroma-access-token _site
 
 sshopts := -o StrictHostKeyChecking=no -i ~/.ssh/deploy_rsa
 

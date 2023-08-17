@@ -5,3 +5,6 @@
 [submodule "submodules/robots.txt"]
 	path = submodules/robots.txt
 	url = https://github.com/prplecake/robots.txt
+[submodule "submodules/pleroma-access-token"]
+	path = submodules/pleroma-access-token
+	url = https://github.com/prplecake/pleroma-access-token
